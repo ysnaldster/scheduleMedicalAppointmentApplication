@@ -3,41 +3,15 @@ package model;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Doctor {
-    private static int id = 0; // Autoincrement -> El valor del dato prevalece mas allá
-    // de las instancias del objeto
-    private String name;
+public class Doctor extends User{
+    // Attribute
     private String speciality;
-    private String address;
-    private String phoneNumber;
 
-    public Doctor(){id++;}
-    public Doctor(String nameDoctor, String specialityDoctor) {
-        this.name = nameDoctor;
-        this.speciality = specialityDoctor;
+    public Doctor(String nameDoctor, String email) {
+        super(nameDoctor, email);
     }
 
-    //Methods
-    public void showName(){
-        System.out.println(name);
-    };
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
+    //Methods Getters & Setters
     public String getSpeciality() {
         return speciality;
     }
@@ -50,10 +24,6 @@ public class Doctor {
         return name + speciality;
     }
 
-    public void showId(){
-        System.out.println("ID Doctor: " + id);
-    }
-
     ArrayList<AvailableAppointment> availableAppointments = new ArrayList<>();
 
     public void addAvailableAppointment(Date date, String time){
@@ -63,6 +33,19 @@ public class Doctor {
     public ArrayList<AvailableAppointment> getAvailableAppointments (){
         return availableAppointments;
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + "\nSpeciality: "+speciality+ "\nAvailable: " +
+                availableAppointments.toString();
+    }
+
+    @Override
+    public void showDataUser() {
+        System.out.println("Empleado del Hospital: Cruz Roja");
+        System.out.println("Departamento: " + "Embriología");
+    }
+
     //Available Appointment
     public static class AvailableAppointment {
         private int id_availableAppointment;
@@ -96,6 +79,11 @@ public class Doctor {
 
         public void setTime(String time) {
             this.time = time;
+        }
+
+        @Override
+        public String toString() {
+            return "Available Appointments \nDate: " +date+ "\nTime: "+time;
         }
     }
 }
